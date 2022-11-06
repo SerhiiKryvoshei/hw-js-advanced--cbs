@@ -276,6 +276,17 @@ body {
 	content: "\272a";
 	color: var(--bg-color);
 }
+
+.section__list-link {
+	text-decoration: none;
+	color: var(--text-color);
+	transition: all 0.5s;
+	outline: transparent;
+}
+
+.section__list-link:hover {
+	text-decoration-line: underline;
+}
 .section__btn {
 	margin: 10px;
 }
