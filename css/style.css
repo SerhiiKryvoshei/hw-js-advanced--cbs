@@ -272,6 +272,10 @@ body {
 	/* margin-bottom: 20px; */
 }
 
+.section__list {
+	padding: 5px 40px;
+}
+
 .section__list-item::marker {
 	content: "\272a";
 	color: var(--bg-color);
