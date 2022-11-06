@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 2</title>
+</head>
+
+<body>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quam est debitis. Architecto quas asperiores
+		blanditiis a fugiat impedit eum dolorem cum rerum dolorum iste amet, ratione assumenda expedita maiores?
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eligendi nemo est? Unde, doloribus, magnam
+		necessitatibus eos quia aliquam eaque quis aspernatur placeat sequi autem officiis, modi a exercitationem totam.
+	</p>
+	<p>
+		Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi doloremque magni ut corporis, perspiciatis
+		tempore in, accusantium suscipit nemo quod saepe. Autem laudantium adipisci nemo magni repudiandae repellat
+		error. Dolore?
+	</p>
+</body>
+
+<script>
+	/* 
+	Задание:
+	getRandomColor функция, которая возвращает случайно сгенерированный цвет в формате #001122
+	Используя функцию getRandomColor добавьте для каждого параграфа рамку случайного цвета
+	*/
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF';
+		var color = '#';
+		for (var i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+
+	const pElements = document.querySelectorAll('p');
+
+	for (let elem of pElements) {
+		elem.style.border = `1px solid ${getRandomColor()}`;
+	}
+
+</script>
+
+</html>

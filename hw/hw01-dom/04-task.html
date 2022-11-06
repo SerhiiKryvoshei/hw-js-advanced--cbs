@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 4</title>
+</head>
+
+<body>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quam est debitis. Architecto quas asperiores
+		blanditiis a fugiat impedit eum dolorem cum rerum dolorum iste amet, ratione assumenda expedita maiores?
+	</p>
+	<p class="border">
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eligendi nemo est? Unde, doloribus, magnam
+		necessitatibus eos quia aliquam eaque quis aspernatur placeat sequi autem officiis, modi a exercitationem totam.
+	</p>
+	<p class="border">
+		Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi doloremque magni ut corporis, perspiciatis
+		tempore in, accusantium suscipit nemo quod saepe. Autem laudantium adipisci nemo magni repudiandae repellat
+		error. Dolore?
+	</p>
+	<ul>
+		<li>Item 01</li>
+		<li>Item 02</li>
+		<li>Item 03</li>
+		<li>Item 04</li>
+		<li>Item 05</li>
+	</ul>
+	<ul class="border">
+		<li>Item 01</li>
+		<li>Item 02</li>
+		<li>Item 03</li>
+		<li>Item 04</li>
+		<li>Item 05</li>
+	</ul>
+</body>
+
+<script>
+	/* 
+	Задание:
+	Для первого и последнего элемента li для всех ul на данной странице
+	добавьте сплошную красную рамку толщиной в 1px
+	*/
+
+	const liElements = document.querySelectorAll('ul>li:first-child, ul>li:last-child');
+	for (elem of liElements) {
+		elem.style.border = "1px solid red";
+	}
+
+</script>
+
+</html>
