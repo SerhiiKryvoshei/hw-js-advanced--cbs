@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 3</title>
+
+	<style>
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid black;
+		}
+
+		td,
+		th {
+			padding: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<table id="statsTable">
+		<tr>
+			<th>Месяц</th>
+			<th>Отдел 1</th>
+			<th>Отдел 2</th>
+		</tr>
+		<tr>
+			<td>Январь</td>
+			<td>50</td>
+			<td>120</td>
+		</tr>
+		<tr>
+			<td>Февраль</td>
+			<td>60</td>
+			<td>140</td>
+		</tr>
+		<tr>
+			<td>Март</td>
+			<td>125</td>
+			<td>115</td>
+		</tr>
+		<tr>
+			<td>Апрель</td>
+			<td>87</td>
+			<td>100</td>
+		</tr>
+		<tr>
+			<td>Март</td>
+			<td>95</td>
+			<td>80</td>
+		</tr>
+		<tr>
+			<td>Июнь</td>
+			<td>115</td>
+			<td>90</td>
+		</tr>
+		<tr>
+			<td>Июль</td>
+			<td>125</td>
+			<td>100</td>
+		</tr>
+	</table>
+
+	<div id="result"></div>
+
+	<script>
+		/*
+		Задание:
+		1) Добавьте строку "Итого" для таблицы statsTable. 
+		2) Напишите сценарий, которым выведите во вторую ячейку этой строки сумму всех числовых значений второй колонки.
+		3) Выведите в третью ячейку этой строки сумму всех числовых значений из третьей колонки таблицы.
+		
+		4) В div с id result выведите сообщение 
+		"Отдел 1 сделал больше продаж" или "Отдел 2 сделал больше продаж"
+		на основе раннее вычисленных значений в строке "Итого".
+		Используйте любые методы, которые были рассмотрены на в прошлых уроках.
+		
+		*/
+
+		const ourTable = document.querySelector('#statsTable');
+		ourTable.innerHTML += `<tr>
+														<th>ИТОГО</th>
+														<th id="totalDepartmentOne"></th>
+														<th id="totalDepartmentTwo"></th>
+													</tr>`;
+
+		let totalDepartmentOne = document.querySelector('#totalDepartmentOne');
+		let totalDepartmentTwo = document.querySelector('#totalDepartmentTwo');
+
+		let sum1 = 0;
+		let sum2 = 0;
+		const rowLength = 3;
+		let resultMessage = ""
+
+		for (const row of ourTable.rows) {
+			if (row.rowIndex == 0) continue;
+			sum1 += Number(row.cells[rowLength - 2].textContent);
+			sum2 += Number(row.cells[rowLength - 1].textContent);
+		}
+		totalDepartmentOne.textContent = sum1;
+		totalDepartmentTwo.textContent = sum2;
+
+		if (sum1 > sum2) {
+			resultMessage = "Отдел 1 сделал больше продаж";
+		} else {
+			resultMessage = "Отдел 2 сделал больше продаж";
+		}
+		document.querySelector('#result').textContent = resultMessage;
+
+	</script>
+</body>
+
+</html>

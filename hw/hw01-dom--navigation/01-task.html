@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 1</title>
+</head>
+
+<body>
+
+	<div>Вы ввели: <span></span></div>
+
+	<script>
+		/*
+		Задание:
+		Выведите значение переменной input в span, расположенный на странице
+		*/
+		let input = prompt("Введите сообщение");
+
+		document.querySelector('div').firstElementChild.innerHTML = `<i>${input}<i>`;
+
+	</script>
+
+</body>
+
+</html>

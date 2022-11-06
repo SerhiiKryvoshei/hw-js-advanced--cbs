@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 4</title>
+	<style>
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid black;
+		}
+
+		td,
+		th {
+			padding: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<table id="statsTable">
+		<tr>
+			<td>Январь</td>
+			<td>120</td>
+		</tr>
+		<tr>
+			<td>Февраль</td>
+			<td>140</td>
+		</tr>
+		<tr>
+			<td>Март</td>
+			<td>115</td>
+		</tr>
+		<tr>
+			<td>Апрель</td>
+			<td>100</td>
+		</tr>
+		<tr>
+			<td>Март</td>
+			<td>80</td>
+		</tr>
+		<tr>
+			<td>Июнь</td>
+			<td>90</td>
+		</tr>
+		<tr>
+			<td>Июль</td>
+			<td>100</td>
+		</tr>
+		<tr>
+			<th>Итого</th>
+			<th id="output"></th>
+		</tr>
+	</table>
+	<script>
+		/*
+		Задание:
+		Напишите сценарий, который на основании значений во второй колонке таблицы #statsTable 
+		поменяет цвет строк таблицы (tr)
+		Если во второй ячейке значение больше 100, 
+				строка должна отображаться зеленым цветом, 
+		если значение менее 100 
+				- красным цветом.
+		Для смены цвета строки используйте код row.style.backgroundColor = "цвет"
+		*/
+
+		for (const row of document.querySelector("#statsTable").rows) {
+			let value = Number(row.cells[1].textContent);
+
+			if (isNaN(value) || value == 0) continue;
+			if (value > 100) {
+				row.style.backgroundColor = "green";
+			} else if (value < 100) {
+				row.style.backgroundColor = "red"
+			}
+		}
+
+	</script>
+</body>
+
+</html>

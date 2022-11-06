@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 2</title>
+
+	<style>
+		#color-sample {
+			width: 250px;
+			height: 70px;
+			margin: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="color-sample"></div>
+	<p>Цвет: </p>
+
+	<script>
+		/*
+		Задание:
+		Поправьте сценарий таким образом, чтобы кроме изменения цвета div#color-sample в параграфе под div выводилось сообщение
+		Цвет: #000000
+		Где #000000 значение, цвета фона элемента div#color-sample
+		*/
+		function getRandomColor() {
+			var letters = '0123456789ABCDEF';
+			var color = '#';
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		}
+
+		let colorSampleDiv = document.querySelector("#color-sample");
+		// colorSampleDiv.style.backgroundColor = getRandomColor();
+
+		let colorValue = getRandomColor();
+		colorSampleDiv.style.backgroundColor = colorValue;
+		colorSampleDiv.nextElementSibling.textContent += ` ${colorValue}`;
+
+	</script>
+</body>
+
+</html>
