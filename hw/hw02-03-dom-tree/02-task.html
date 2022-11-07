@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 2</title>
+
+	<style>
+		div {
+			font-weight: bold;
+		}
+
+		.box-work-days {
+			background-color: cornflowerblue;
+		}
+
+		.box-weekend-days {
+			background-color: rgb(230, 46, 46);
+		}
+	</style>
+</head>
+
+<body>
+	Рабочие дни
+	<div class="box-work-days"></div>
+
+	Выходные дни
+	<div class="box-weekend-days"></div>
+
+	<script>
+		/*
+				Задание:
+				Используя параграфы, 
+				1) выведите все рабочие дни недели в div, который находится после фразы "Рабочие дни", 
+				2) выведите все выходные дни недели после фразы "Выходные дни".
+				
+				Можно внести в разметку соответствующие изменения, чтобы упростить задачу поиска необходимых div. 
+				Параграфы создавайте с помощью перебора массива days. 
+				В параграф помещайте значение свойства name.
+		 */
+
+		let days = [{ name: "Sunday", isWorkDay: false },
+		{ name: "Monday", isWorkDay: true },
+		{ name: "Tuesday", isWorkDay: true },
+		{ name: "Wednesday", isWorkDay: true },
+		{ name: "Thursday", isWorkDay: true },
+		{ name: "Friday", isWorkDay: true },
+		{ name: "Saturday", isWorkDay: false }];
+
+		const workDays = document.querySelector('.box-work-days');
+		const weekendDays = document.querySelector('.box-weekend-days');
+
+		days.forEach(day => createParagraph(day));
+
+		function createParagraph(day) {
+			let paragraph = document.createElement('p');
+			paragraph.textContent = day.name;
+			if (day.isWorkDay) {
+				workDays.append(paragraph);
+			} else {
+				weekendDays.append(paragraph);
+			}
+
+		}
+
+
+
+
+	</script>
+</body>
+
+</html>
