@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 3</title>
+
+	<style>
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid black;
+		}
+
+		td,
+		th {
+			padding: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<table id="statsTable">
+		<tr>
+			<td>Январь</td>
+			<td>20</td>
+		</tr>
+		<tr>
+			<td>Февраль</td>
+			<td>140</td>
+		</tr>
+		<tr>
+			<td>Март</td>
+			<td>115</td>
+		</tr>
+		<tr>
+			<td>Апрель</td>
+			<td>100</td>
+		</tr>
+		<tr>
+			<td>Март</td>
+			<td>80</td>
+		</tr>
+		<tr>
+			<td>Июнь</td>
+			<td>90</td>
+		</tr>
+		<tr>
+			<td>Июль</td>
+			<td>100</td>
+		</tr>
+	</table>
+
+	<script>
+		/*
+			Задание:
+			Напишите сценарий, который удалит строки таблицы, 
+			в которых во второй колонке находятся значения меньше 100.
+			
+			(В прошлом уроке были рассмотрены примеры, показывающие как получить доступ к родительским элементам,
+			так как удалять нужно не ячейку td, в которой находится значение, 
+			а строку tr, в которой расположена эта ячейка).
+		*/
+
+		const statTable = document.querySelector('#statsTable');
+
+		// -----------не правильно, когда удаляем строку таблицы, следующая строка станет на ее место
+		// for (let row of statTable.rows) {
+		// 	let value = Number(row.cells[1].textContent);
+		// 	if (value < 100) row.remove();
+		// 	console.log(value);
+		// }
+
+		for (let i = 0; i < statTable.rows.length; i++) {
+			let row = statTable.rows[i];
+			let value = Number(row.cells[1].textContent);
+			if (value < 100) {
+				row.remove();
+				i--;
+			}
+		}
+
+	</script>
+
+</body>
+
+</html>
