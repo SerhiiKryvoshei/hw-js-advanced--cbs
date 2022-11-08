@@ -460,3 +460,18 @@ body {
 }
 
 /* #endregion */
+
+/* #region responsive ---------------------------------------------------------*/
+
+/* -------------max-width: 576px------------------ */
+@media (max-width: 576px) {
+	.header__inner {
+		flex-direction: column;
+	}
+
+	.btn {
+		display: none;
+	}
+}
+
+/* #endregion */
