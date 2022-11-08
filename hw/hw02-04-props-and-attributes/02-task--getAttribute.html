@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 02</title>
+</head>
+
+<body>
+
+	<div data-value="10">
+		<p my-attribute="4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur eum neque minus et officia
+			sequi, velit tempora consequatur mollitia ducimus consequuntur error amet reprehenderit id distinctio laborum est
+			architecto repellat!</p>
+		<p data-value="1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab. Voluptas temporibus quam
+			quibusdam odio doloribus corrupti assumenda rem rerum, iusto natus animi accusamus dolore. Quas architecto libero
+			cum modi.</p>
+		<p my-attribute="37">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus officiis natus itaque
+			error saepe, alias harum porro nemo sint? Provident, optio. Aliquid fuga qui assumenda iusto, nihil id obcaecati
+			est?</p>
+		<a my-attribute="7" href="https://itvdn.com">ITVDN</a>
+		<span data-value="9">Hello world</span>
+	</div>
+
+	<script>
+		/*
+		Задание:
+		Посчитайте сумму значений атрибутов data-value и my-attribute 
+		всех элементов на текущей странице и отобразите ее пользователю.
+		*/
+
+		let totalSum = 0;
+
+		const bodyElements = document.querySelectorAll('[data-value], [my-attribute]')
+
+		for (elem of bodyElements) {
+
+			if (elem.hasAttribute('data-value'))
+				totalSum += Number(elem.getAttribute('data-value'));
+			if (elem.hasAttribute('my-attribute'))
+				totalSum += Number(elem.getAttribute('my-attribute'));
+		}
+
+		let paragraph = document.createElement('p');
+		paragraph.innerHTML = `Сумма значений атрибутов data-value и my-attribute = <b>${totalSum}</b>`;
+
+		document.body.append(paragraph);
+
+	</script>
+</body>
+
+</html>
