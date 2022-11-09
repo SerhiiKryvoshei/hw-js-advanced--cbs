@@ -437,6 +437,38 @@ body {
 
 /* #endregion */
 
+/* #region lesson-changing-dom --------------------------------------------------------------*/
+
+.lesson-changing-dom {
+	padding: 0;
+}
+
+/* #endregion */
+
+/* #region lesson-events-p1 --------------------------------------------------------------*/
+
+.lesson-events-p1 {
+	padding: 0;
+}
+
+/* #endregion */
+
+/* #region lesson-events-p2 --------------------------------------------------------------*/
+
+.lesson-events-p2 {
+	padding: 0;
+}
+
+/* #endregion */
+
+/* #region lesson-events-p3 --------------------------------------------------------------*/
+
+.lesson-events-p3 {
+	padding: 0;
+}
+
+/* #endregion */
+
 /* #region footer -------------------------------------------------------------*/
 
 .footer {
@@ -466,7 +498,21 @@ body {
 /* -------------max-width: 576px------------------ */
 @media (max-width: 576px) {
 	.header__inner {
+		height: 150px;
 		flex-direction: column;
+	}
+
+	.title {
+		font-size: 32px;
+	}
+	.subtitle {
+		font-size: 28px;
+	}
+
+	.section__text {
+		font-size: 16px;
+		line-height: 1.3;
+		text-align: left;
 	}
 
 	.btn {
