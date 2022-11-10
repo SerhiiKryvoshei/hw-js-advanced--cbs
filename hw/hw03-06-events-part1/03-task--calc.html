@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 03</title>
+
+	<style>
+		.error {
+			color: red;
+			display: none;
+		}
+
+		.error--border {
+			border: 1px solid red;
+		}
+	</style>
+</head>
+
+<body>
+	Операнд 1: <input id="input1" type="text"> <br />
+	<span id="input1Error" class="error">Введите значение</span> <br />
+
+	Операнд 2: <input id="input2" type="text"> <br />
+	<span id="input2Error" class="error">Введите значение</span> <br />
+
+	<button id="add-btn">+</button>
+	<button id="rem-btn">-</button>
+	<button id="mul-btn">*</button>
+	<button id="div-btn">/</button>
+	<button id="reset-btn">reset</button>
+
+	<script>
+
+		/*
+		Задание:
+		Внесите правки в данный сценарий.
+		
+		1) Добавьте обработчик на клик по кнопке reset. 
+		При клике значения, введённые в поля ввода "Операнд 1" и "Операнд 2", должны быть заменены на значения 0
+		
+		2)Добавьте проверку перед выполнением любой арифметической операции. 
+		Если поле ввода пустое, 
+			сделайте для этого поля ввода красную рамку 
+			и сделайте видимый элемент с ошибкой под этим полем ввода.
+		
+		Для поля ввода input1 при отсутствии значения сделайте видимым span #input1Error 
+		для поля ввода input2 сделайте, в случае ошибки, #input2Error видимым.
+		*/
+
+		let input1 = document.querySelector("#input1");
+		let input2 = document.querySelector("#input2");
+
+		let addBtn = document.querySelector("#add-btn");
+		let remBtn = document.querySelector("#rem-btn");
+		let mulBtn = document.querySelector("#mul-btn");
+		let divBtn = document.querySelector("#div-btn");
+
+		const btnReset = document.querySelector('#reset-btn');
+
+		addBtn.addEventListener("click", function () {
+			resetErrors();
+			if (validate()) alert(Number(input1.value) + Number(input2.value));
+		});
+
+		remBtn.addEventListener("click", function () {
+			resetErrors();
+			if (validate()) alert(input1.value - input2.value);
+		});
+
+		mulBtn.addEventListener("click", function () {
+			resetErrors();
+			if (validate()) alert(input1.value * input2.value);
+		});
+
+		divBtn.addEventListener("click", function () {
+			resetErrors();
+			if (validate()) alert(input1.value / input2.value);
+		});
+
+		// ----решение------
+		btnReset.addEventListener('click', () => input1.value = input2.value = 0);
+
+		function validate() {
+			let valid = true;
+
+			if (!input1.value) {
+				valid = false;
+				showError(input1);
+			}
+			if (!input2.value) {
+				valid = false;
+				showError(input2);
+			}
+
+			return valid;
+		}
+
+		function showError(element) {
+			let idErrorElement = element.id + 'Error';
+			element.classList.add('error--border');
+			document.querySelector(`#${idErrorElement}`).style.display = 'block';
+		}
+
+		function resetErrors() {
+			let errorElements = document.querySelectorAll('.error');
+			errorElements.forEach(elem => elem.style.display = 'none');
+
+			input1.classList.remove('error--border');
+			input2.classList.remove('error--border');
+		}
+
+	</script>
+</body>
+
+</html>
