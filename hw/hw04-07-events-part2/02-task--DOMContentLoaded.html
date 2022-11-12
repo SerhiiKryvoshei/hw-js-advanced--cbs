@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 02</title>
+	<script>
+		/*
+		Задание:
+		Не изменяя расположения элемента script, исправьте ошибку сценария.
+		При загрузке данного сценария на странице должно отобразиться сообщение Hello world
+		*/
+
+		// было
+		// document.querySelector("#output").textContent = "Hello world";
+
+		// ---Решение---
+		document.addEventListener('DOMContentLoaded', (e) => {
+			document.querySelector("#output").textContent = "Hello world";
+		});
+
+	</script>
+</head>
+
+<body>
+	<pre>
+			Задание:
+			Не изменяя расположения элемента script, исправьте ошибку сценария.
+			При загрузке данного сценария на странице должно отобразиться сообщение Hello world
+	</pre>
+	<div id="output">
+
+	</div>
+</body>
+
+</html>

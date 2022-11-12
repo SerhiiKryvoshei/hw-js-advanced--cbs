@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 03</title>
+	<style>
+		div {
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			background-color: green;
+			margin: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<pre>
+		Задание:
+		Реализуйте сценарий, который при нажатии на клавиши 1, 2 или 3 на клавиатуре 
+		будет добавлять рамку красного цвета на соответствующий div. 
+		Если зажаты клавиши Ctrl + A, то красная рамка добавляется сразу для всех div
+	</pre>
+	<div></div>
+	<div></div>
+	<div></div>
+
+	<script>
+		/*
+		Задание:
+		Реализуйте сценарий, который при нажатии на клавиши 1, 2 или 3 на клавиатуре 
+		будет добавлять рамку красного цвета на соответствующий div. 
+		Если зажаты клавиши Ctrl + A, то красная рамка добавляется сразу для всех div
+		*/
+
+		const divAll = document.querySelectorAll('div');
+
+		document.addEventListener('keydown', (e) => {
+			if (e.code == 'Digit1' || e.code == 'Numpad1') divAll[0].style.border = '2px solid red';
+			if (e.code == 'Digit2' || e.code == 'Numpad2') divAll[1].style.border = '2px solid red';
+			if (e.code == 'Digit3' || e.code == 'Numpad3') divAll[2].style.border = '2px solid red';
+			if (e.code == 'KeyA' && e.ctrlKey) divAll.forEach(div => div.style.border = '4px solid red');
+		});
+
+	</script>
+
+
+</body>
+
+</html>

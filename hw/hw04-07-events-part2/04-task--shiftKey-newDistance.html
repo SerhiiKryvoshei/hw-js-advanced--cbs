@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 04</title>
+	<style>
+		#element {
+			width: 100px;
+			height: 100px;
+			background-color: greenyellow;
+			position: absolute;
+		}
+	</style>
+</head>
+
+<body>
+	<pre>
+		Задание:
+		Внесите изменения в сценарий.
+		Сделайте чтобы при зажатой клавише Shift и нажатии стрелок на клавиатуре
+		элемент по странице двигался в два раза быстрей, чем если просто нажимать на стрелки.
+	</pre>
+	<div id="element"></div>
+
+	<script>
+		/*
+		Задание:
+		Внесите изменения в сценарий. 
+		Сделайте чтобы при зажатой клавише Shift и нажатии стрелок на клавиатуре 
+		элемент по странице двигался в два раза быстрей, чем если просто нажимать на стрелки.
+		*/
+
+		let div = document.querySelector("#element");
+		let distance = 10;
+
+		document.addEventListener("keydown", function (e) {
+			// +++ Решение
+			let newDistance = distance;
+			if (e.shiftKey) newDistance *= 2;
+			// --- Решение
+
+			switch (e.code) {
+				case "ArrowLeft":
+					moveLeft(div, newDistance);
+					break;
+				case "ArrowRight":
+					moveRight(div, newDistance);
+					break;
+				case "ArrowUp":
+					moveUp(div, newDistance);
+					break;
+				case "ArrowDown":
+					moveDown(div, newDistance);
+					break;
+			}
+		});
+
+		function moveUp(element, distance) {
+			let top = getComputedStyle(element).top;
+			element.style.top = parseInt(top) - distance + "px";
+		}
+
+		function moveDown(element, distance) {
+			let top = getComputedStyle(element).top;
+			element.style.top = parseInt(top) + distance + "px";
+		}
+
+		function moveLeft(element, distance) {
+			let left = getComputedStyle(element).left;
+			element.style.left = parseInt(left) - distance + "px";
+		}
+
+		function moveRight(element, distance) {
+			let left = getComputedStyle(element).left;
+			element.style.left = parseInt(left) + distance + "px";
+		}
+	</script>
+
+</body>
+
+</html>
