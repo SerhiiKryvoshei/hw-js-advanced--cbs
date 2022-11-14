@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 01</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Добавьте для кнопки два обработчика, 
+один должен сработать в фазе capturing,
+второй - в фазе bubbling
+	</pre>
+	<button class="btn-click">Click me!</button>
+	<script>
+		/*
+		Задание:
+		Добавьте для кнопки два обработчика, один должен сработать в фазе capturing, второй - в фазе bubbling
+		*/
+
+		const btn = document.querySelector('.btn-click');
+		btn.addEventListener('click', () => alert('фаза capturing'), true);
+		btn.addEventListener('click', () => alert('фаза bubbling'));
+	</script>
+</body>
+
+</html>

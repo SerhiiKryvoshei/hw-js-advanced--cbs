@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 05</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		#generateButton {
+			height: 5vh;
+			background-color: green;
+			color: white;
+			cursor: pointer;
+			text-align: center;
+			font-size: 24px;
+
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			flex-direction: column;
+		}
+
+		#interactivePanel {
+			position: relative;
+			height: 95vh;
+		}
+
+		.interactiveElement {
+			position: absolute;
+			width: 50px;
+			height: 50px;
+		}
+	</style>
+</head>
+
+<body>
+	<pre>
+Задание:
+Допишите сценарий, 
+при нажатии на кнопку Generate, с помощью функции generateElement, должно создаваться 100 элементов
+и размещаться в элементе interactivePanel. 
+При повторном нажатии на кнопку, содержимое interactivePanel должно удалятся, 
+после чего создаваться новые 100 элементов.
+
+Все элементы с классом interactiveElement должны поддерживать перетаскивание мышью,
+при левом клике клавиши по элементу он должен перемещаться за курсором до момента обжатия клавиши мыши.
+	</pre>
+
+	<div id="generateButton">Generate</div>
+	<div id="interactivePanel"></div>
+
+	<script>
+		/*
+		Задание:
+		Допишите сценарий, при нажатии на кнопку Generate, с помощью функции generateElement, должно создаваться 100 элементов и размещаться в
+		элементе interactivePanel. При повторном нажатии на кнопку, содержимое interactivePanel должно удалятся, после чего создаваться новые 100 элементов.
+		Все элементы с классом interactiveElement должны поддерживать перетаскивание мышью, при левом клике клавиши по элементу он должен перемещаться
+		за курсором до момента обжатия клавиши мыши.
+		*/
+
+		// Создает и возвращает div с классом interactiveElement со случайной позицией в текущем окне
+		function generateElement() {
+			let div = document.createElement("div");
+			div.classList.add("interactiveElement");
+			let maxLeft = window.innerWidth - 50; // ширина текущего документа
+			let maxTop = window.innerHeight - 150; // высота текущего документа
+			div.style.top = getRandomValue(maxTop) + "px";
+			div.style.left = getRandomValue(maxLeft) + "px";
+			div.style.backgroundColor = getRandomColor();
+			return div;
+		}
+
+		// возвращает случайное значение цвета 
+		function getRandomColor() {
+			var letters = '0123456789ABCDEF';
+			var color = '#';
+			for (var i = 0; i < 6; i++) {
+				color += letters[getRandomValue(16)];
+			}
+			return color;
+		}
+
+		// возвращает случайное значение от 0 до max
+		function getRandomValue(max) {
+			return Math.floor(Math.random() * max);
+		}
+
+		// -------------
+		// ---Решение------
+		// -------------
+
+		const generateButton = document.querySelector('#generateButton');
+		const interactivePanel = document.querySelector('#interactivePanel');
+		move = true;
+		let offsetX, offsetY;
+		let currentDiv;
+
+		const generateButtonHeight = parseInt(getComputedStyle(generateButton).height);
+		const preHeight = parseInt(getComputedStyle(document.querySelector('pre')).height);
+
+		generateButton.addEventListener('click', (e) => {
+			// очистим панель
+			interactivePanel.innerHTML = '';
+
+			// заполним панель
+			for (let i = 0; i < 100; i++) {
+				interactivePanel.append(generateElement());
+			}
+		});
+
+
+
+		interactivePanel.addEventListener('mousedown', (e) => {
+			if (e.target.classList.contains('interactiveElement')) {
+				move = true;
+				offsetX = e.offsetX;
+				offsetY = e.offsetY;
+				currentDiv = e.target;
+			}
+		});
+
+		interactivePanel.addEventListener('mousemove', (e) => {
+			if (move) {
+				currentDiv.style.top = e.clientY - offsetY - generateButtonHeight - preHeight + 'px';
+				currentDiv.style.left = e.clientX - offsetX + 'px';
+			};
+		});
+
+		interactivePanel.addEventListener('mouseup', (e) => {
+			move = false;
+		});
+
+	</script>
+</body>
+
+</html>
