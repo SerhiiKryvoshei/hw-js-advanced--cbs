@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 04</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Перепишите функцию конструктор Rect. 
+Вынесите методы из экземпляра в прототип.
+</pre>
+	<script>
+		/*
+		Задание:
+		Перепишите функцию конструктор Rect. Вынесите методы из экземпляра в прототип.
+		*/
+
+		function Rect(width, height) {
+			this.width = width;
+			this.height = height;
+
+			// this.getArea = function () {
+			// 	return this.height * this.width;
+			// }
+
+			// this.getPerimeter = function () {
+			// 	return this.height * 2 + this.width * 2;
+			// }
+		}
+
+		// +++ Решение
+		Rect.prototype.getArea = function () {
+			return this.height * this.width;
+		};
+
+		Rect.prototype.getPerimeter = function () {
+			return this.height * 2 + this.width * 2;
+		}
+		// --- Решение
+
+		let rect1 = new Rect(100, 50);
+		let rect2 = new Rect(25, 33);
+
+		console.log("rect1 area " + rect1.getArea());
+		console.log("rect1 perimeter " + rect1.getPerimeter());
+
+		console.log("rect2 area " + rect2.getArea());
+		console.log("rect2 perimeter " + rect2.getPerimeter());
+	</script>
+</body>
+
+</html>

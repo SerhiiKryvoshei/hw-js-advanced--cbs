@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 01</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Выполните рефакторинг кода. 
+Сделайте так, чтобы объекты создавались не через литералы, а через функцию конструктор.
+</pre>
+
+	<script>
+		/*
+		Задание:
+		Выполните рефакторинг кода. 
+		Сделайте так, чтобы объекты создавались не через литералы, а через функцию конструктор.
+		*/
+
+		// let user1 = {
+		// 	firstName: "Ivan",
+		// 	lastName: "Ivanov",
+
+		// 	show: function () {
+		// 		console.log(this.firstName + " " + this.lastName);
+		// 	}
+		// }
+
+		// let user2 = {
+		// 	firstName: "Olga",
+		// 	lastName: "Petrova",
+
+		// 	show: function () {
+		// 		console.log(this.firstName + " " + this.lastName);
+		// 	}
+		// }
+
+		// +++++ Решение-----
+		function User(firstName, lastName) {
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+
+		User.prototype.show = function (element) {
+			const message = `${this.firstName} ${this.lastName}`;
+			console.log(message);
+			let p = document.createElement("p");
+			p.textContent = message;
+			document.body.append(p);
+		}
+
+		let user1 = new User('Ivan', 'Ivanov');
+		let user2 = new User('Olga', 'Petrova');
+		// ----- Решение-----
+
+		user1.show();
+		user2.show();
+	</script>
+
+</body>
+
+</html>

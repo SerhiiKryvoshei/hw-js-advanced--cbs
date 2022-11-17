@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 02</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Выполните рефакторинг кода.
+Замените фабричный метод createUser на функцию конструктор.
+	</pre>
+
+	<script>
+		/*
+		Задание:
+		Выполните рефакторинг кода. 
+		Замените фабричный метод createUser на функцию конструктор.
+		*/
+
+		function createUser(login, email) {
+			return {
+				login: login,
+				email: email,
+
+				showContactInfo: function () {
+					console.log("Мой логин " + this.login + ", мой email " + this.email);
+				}
+			}
+		}
+
+		let user1 = createUser("admin", "admin@example.com");
+		let user2 = createUser("user", "user@example.com");
+
+		user1.showContactInfo();
+		user2.showContactInfo();
+
+		// +++ Решение
+
+		function User(login, email) {
+			this.login = login;
+			this.email = email;
+		}
+
+		User.prototype.showContactInfo = function () {
+			const message = `Мой логин ${this.login}, мой email ${this.email}`;
+			const p = document.createElement("p");
+			p.textContent = message;
+			document.body.append(p);
+			console.log(message);
+		}
+
+		user1 = new User("admin-new", "admin@example.com");
+		user2 = new User("user-new", "user@example.com");
+
+		user1.showContactInfo();
+		user2.showContactInfo();
+
+	</script>
+</body>
+
+</html>
