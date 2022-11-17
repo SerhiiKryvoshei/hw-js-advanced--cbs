@@ -451,7 +451,7 @@ body {
 /* #region lesson-changing-dom --------------------------------------------------------------*/
 
 .lesson-changing-dom {
-	padding: 0;
+	padding: 20px 0;
 }
 
 /* #endregion */
@@ -467,7 +467,7 @@ body {
 /* #region lesson-events-p2 --------------------------------------------------------------*/
 
 .lesson-events-p2 {
-	padding: 0;
+	padding: 20px 0;
 }
 
 /* #endregion */
@@ -476,6 +476,14 @@ body {
 
 .lesson-events-p3 {
 	padding: 0;
+}
+
+/* #endregion */
+
+/* #region lesson-constructor --------------------------------------------------------------*/
+
+.lesson-constructor {
+	padding: 20px 0;
 }
 
 /* #endregion */
