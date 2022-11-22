@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 03</title>
+
+	<style>
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		.car-info {
+			display: inline-block;
+			margin: 10px 0 10px 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<pre>
+Задание:
+Замените функцию конструктор на класс.
+Все свойства класса Car поменяйте на закрытые поля 
+и для каждого поля добавьте getter и setter по необходимости.
+Для поля html предусмотрите возможность только получения значения, 
+организуйте код таким образом, чтобы не допустить
+редактирование значения свойства html напрямую.
+	</pre>
+
+	<div class="car-info" id="placeholder1"></div>
+	<div class="car-info" id="placeholder2"></div>
+	<div class="car-info" id="placeholder3"></div>
+
+	<script>
+		/*
+		Задание:
+		Замените функцию конструктор на класс.
+		Все свойства класса Car поменяйте на закрытые поля и для каждого поля добавьте getter и setter по необходимости.
+		Для поля html предусмотрите возможность только получения значения, организуйте код таким образом, чтобы не допустить
+		редактирование значения свойства html напрямую.
+		*/
+
+		// function Car(image, manufacturer) {
+		// 	this.image = image;
+		// 	this.manufacturer = manufacturer;
+		// 	this.html = `<img src="images/${this.image}" /><br />Производитель: ${this.manufacturer}<br />`;
+		// }
+
+		class Car {
+			#image;
+			#manufacturer;
+			#html;
+
+			constructor(image, manufacturer) {
+				this.#image = image;
+				this.#manufacturer = manufacturer;
+			}
+
+			get html() {
+				return `<img src="images/${this.#image}" /><br />Производитель: ${this.#manufacturer}<br />`;
+			}
+
+			get image() {
+				return this.#image;
+			}
+
+			set image(value) {
+				this.#image = value;
+			}
+
+			get manufacturer() {
+				return this.#manufacturer;
+			}
+
+			set manufacturer(value) {
+				this.#manufacturer = value;
+			}
+
+		}
+
+		let car1 = new Car("audi-a6-250.jpg", "Audi");
+		let car2 = new Car("jaguar-x-type-250.jpg", "Jaguar");
+		let car3 = new Car("porsche-carrera-911-250.jpg", "Porsce");
+
+		let placeholder1 = document.querySelector("#placeholder1");
+		let placeholder2 = document.querySelector("#placeholder2");
+		let placeholder3 = document.querySelector("#placeholder3");
+
+		placeholder1.innerHTML = car1.html;
+		placeholder2.innerHTML = car2.html;
+		placeholder3.innerHTML = car3.html;
+
+	</script>
+</body>
+
+</html>
