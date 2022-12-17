@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 03</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Найдите и исправьте ошибку
+Uncaught ReferenceError: 
+Must call super constructor in derived class before accessing 'this' or returning from derived
+constructor
+
+class Truck extends Car {
+	weight;
+	maxCargo;
+	// model;
+
+	constructor(model, maxCargo) {
+		super(model);
+		// this.model = model;
+		this.maxCargo = maxCargo;
+	}
+...
+}
+</pre>
+
+	<script>
+
+		/*
+		Задание:
+		Найдите и исправьте ошибку
+		*/
+
+		class Car {
+			model;
+
+			constructor(model) {
+				this.model = model;
+			}
+
+			move() {
+				console.log(`Машина ${this.model} двигается со скоростью 80 км/час`);
+			}
+		}
+
+		class Truck extends Car {
+			weight;
+			maxCargo;
+			// model;
+
+			constructor(model, maxCargo) {
+				super(model);
+				// this.model = model;
+				this.maxCargo = maxCargo;
+			}
+
+			loadCargo(weight) {
+				if (weight > this.maxCargo) {
+					console.log("Этот грузовик не может перевозить более 1000кг груза");
+				}
+				else {
+					this.weight = weight;
+					console.log(`В грузовик загружено ${this.weight}кг.`);
+				}
+			}
+		}
+
+		let v1 = new Car("Mazda");
+		v1.move();
+
+		let v2 = new Truck();
+		v2.loadCargo(1500);
+		v2.move();
+	</script>
+</body>
+
+</html>

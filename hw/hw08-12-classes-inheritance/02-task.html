@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 02</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+	Сделайте так, чтобы класс Truck наследовался от класса Car.
+	Переопределитe метод move, в классе Truck -
+		Если в грузовик загружено менее 500 кг груза, 
+			должна срабатывать реализация метода из класса Car
+		Если в грузовик загружено более 500 кг, 
+			должно выводиться сообщение "Грузовик движется со скоростью 50 км/час."
+</pre>
+
+	<script>
+		/*
+		Задание:
+		Сделайте так, чтобы класс Truck наследовался от класса Car.
+		Переопределит метод move, в классе Truck - 
+		Если в грузовик загружено менее 500 кг груза, должна срабатывать реализация метода из класса Car
+		Если в грузовик загружено более 500 кг, должно выводиться сообщение "Грузовик движется со скоростью 50 км/час."
+		*/
+
+		class Car {
+			move() {
+				console.log("Машина двигается со скоростью 80 км/час");
+			}
+		}
+
+		class Truck extends Car {
+			weight;
+			loadCargo(weight) {
+				if (weight > 1000) {
+					console.log("Этот грузовик не может перевозить более 1000кг груза");
+				}
+				else {
+					this.weight = weight;
+					console.log(`В грузовик загружено ${this.weight}кг.`);
+				}
+			}
+
+			move() {
+				if (this.weight > 500) {
+					console.log("Грузовик движется со скоростью 50 км/час.");
+				} else {
+					super.move();
+				}
+			}
+
+		}
+
+		let v1 = new Car();
+		v1.move();
+
+		let v2 = new Truck();
+		v2.loadCargo(1500);
+		v2.loadCargo(990);
+		v2.move();
+
+		let v3 = new Truck();
+		v3.loadCargo(100);
+		v3.move();
+
+	</script>
+</body>
+
+</html>

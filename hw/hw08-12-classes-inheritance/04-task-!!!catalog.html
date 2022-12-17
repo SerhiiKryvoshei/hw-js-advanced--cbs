@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 04</title>
+	<style>
+		#catalog {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		#catalog>div {
+			margin: 10px;
+		}
+
+		.bg {
+			width: 250px;
+			height: 300px;
+			background-size: cover;
+		}
+	</style>
+</head>
+
+<body>
+	<pre>
+Задание:
+Внесите следующие правки в код:
+	1) Сделайте так, чтобы в Catalog, в метод add можно было добавлять только объекты, 
+	которые наследовались от класса CatalogItem
+	Если вызывая метод add передается другой объект, 
+	через alert выводите сообщение 
+	"Данный метод принимает только классы производные от CatalogItem"
+	2) Добавьте класс ProductWithDiscount - задача класса выводить продукт со скидкой,
+	которая была указана в конструкторе
+	Наследуйте класс от класса Product
+	Добавьте для класса конструктор, через который будет добавятся скидка на продукт.
+	Сделайте так, чтобы класс самостоятельно вычислял цену продукта 
+	с учетом указанной скидки и выводил на экране 
+	базовую цену и акционную цену (Можно вывести базовую цену перечеркнутой).
+	Замените код catalog.add(new Product("images/img4.jpg", 65.55)); 
+	на catalog.add(new ProductWithDiscount("images/img4.jpg", 65.55, 20));,
+	третий параметр 20 - скидка 20%
+	Убедитесь, что в каталоге последний продукт выводится со скидкой 20%
+</pre>
+
+	<div id="catalog"></div>
+
+	<template id="product">
+		<div>
+			<div class="bg" style="background-image: url('{{imagePath}}');"></div>
+			<p>{{price}}$</p>
+		</div>
+	</template>
+
+	<template id="advertisement">
+		<div>
+			<a href="{{url}}" target="_blank">
+				<div class="bg" style="background-image: url('{{imagePath}}');"></div>
+			</a>
+		</div>
+	</template>
+
+	<template id="product-sale">
+		<div>
+			<div class="bg" style="background-image: url('{{imagePath}}');"></div>
+			<strike>{{basePrice}}$</strike>
+			<span>{{price}}$</span>
+		</div>
+	</template>
+
+	<script src="mustache.min.js"></script>
+
+	<script>
+		/*
+		Задание:
+		Внесите следующие правки в код:
+		1)  Сделайте так, чтобы в Catalog, в метод add можно было добавлять только объекты,
+				 которые наследовались от класса CatalogItem
+				Если вызывая метод add передается другой объект, через alert выводите сообщение "Данный метод принимает только классы производные от CatalogItem"
+		2)  Добавьте класс ProductWithDiscount - задача класса выводить продукт со скидкой, 
+				которая была указана в конструкторе
+				Наследуйте класс от класса Product
+				Добавьте для класса конструктор, через который будет добавятся скидка на продукт.
+				Сделайте так, чтобы класс самостоятельно вычислял цену продукта с учетом указанной скидки и выводил на экране базовую цену и акционную цену (Можно вывести базовую цену перечеркнутой).
+				Замените код catalog.add(new Product("images/img4.jpg", 65.55)); 
+				на catalog.add(new ProductWithDiscount("images/img4.jpg", 65.55, 20));,
+				третий параметр 20 - скидка 20%
+				Убедитесь, что в каталоге последний продукт выводится со скидкой 20%
+		*/
+
+		class CatalogItem {
+			template;
+			imagePath;
+
+			constructor(image, templateSelector) {
+				this.imagePath = image;
+				this.template = document.querySelector(templateSelector).innerHTML;
+
+			}
+
+			renderIn(element) {
+				let html = Mustache.render(this.template, this);
+				element.innerHTML += html;
+			}
+		}
+
+		class Product extends CatalogItem {
+			price;
+
+			constructor(imagePath, price, templateSelector = "#product") {
+				super(imagePath, templateSelector);
+				this.price = price;
+			}
+		}
+
+		class ProductWithDiscount extends Product {
+			discount;
+			basePrice;
+
+			constructor(imagePath, price, discount) {
+				super(imagePath, price, "#product-sale");
+				this.basePrice = price;
+				this.discount = discount;
+				this.price = this.price - (this.price / 100 * this.discount);
+			}
+
+		}
+
+		class Advertisement extends CatalogItem {
+			url;
+
+			constructor(imagePath, url) {
+				super(imagePath, "#advertisement");
+				this.url = url;
+			}
+		}
+
+		class Catalog {
+			items = [];
+			element;
+
+			constructor(elementSelector) {
+				this.element = document.querySelector(elementSelector);
+			}
+
+			add(item) {
+				if (item instanceof CatalogItem) {
+					this.items.push(item);
+				} else {
+					alert("Данный метод принимает только классы производные от CatalogItem");
+				}
+			}
+
+			show() {
+				this.items.forEach(item => {
+					item.renderIn(this.element);
+				});
+			}
+		}
+
+		let catalog = new Catalog("#catalog");
+
+		catalog.add(new Product("images/img1.jpg", 35.55));
+		catalog.add(new Product("images/img2.jpg", 25.25));
+		catalog.add(new Advertisement("images/banner1.jpg", "https://itvdn.com/ru/catalog"));
+		catalog.add(new Product("images/img3.jpg", 14.55));
+		catalog.add(new Product("images/img4.jpg", 65.55));
+		catalog.add(new Advertisement("images/banner2.jpg", "https://itvdn.comru/ru/specialities"));
+
+		// тест пункта 1 задачи
+		catalog.add(new Object);
+		// тест пункта 2 задачи
+		catalog.add(new ProductWithDiscount("images/img4.jpg", 65.55, 20));
+
+		catalog.show();
+
+	</script>
+</body>
+
+</html>

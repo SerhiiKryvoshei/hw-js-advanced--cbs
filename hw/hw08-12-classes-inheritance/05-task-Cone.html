@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 05</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+	Создайте класс Cone (конус), 
+	который будет расширять класс Circle (наследоваться от класса Circle),
+	конструктор класса Cone должен принимать радиус и высоту конуса.
+	В классе Cone добавьте метод getVolume, 
+	который будет возвращать объем конуса 
+	и переопределите метод getArea таким образом,
+	чтобы он вычислял площадь полной поверхности конуса.
+	
+	По возможности используйте логику базового класса через ключевое слово super
+</pre>
+
+	<script>
+		/*
+		Задание:
+		Создайте класс Cone (конус), который будет расширять класс Circle (наследоваться от класса Circle), конструктор класса Cone должен принимать радиус и высоту конуса.
+		В классе Cone добавьте метод getVolume, который будет возвращать объем конуса и переопределите метод getArea таким образом, чтобы он вычислял площадь полной поверхности конуса.
+		По возможности используйте логику базового класса через ключевое слово super
+		*/
+		class Circle {
+			constructor(radius) {
+				this.radius = radius;
+			}
+
+			getArea() {
+				return Math.PI * Math.pow(this.radius, 2);
+			}
+		}
+
+		class Cone extends Circle {
+			constructor(radius, height) {
+				super(radius);
+				this.height = height;
+			}
+
+			getVolume() {
+				return this.height / 3 * super.getArea();
+			}
+
+			getArea() {
+				let l = Math.sqrt(Math.pow(this.radius, 2) + Math.pow(this.height, 2));
+				return Math.PI * this.radius * l + super.getArea();
+			}
+		}
+
+		let radius = 2;
+		let height = 3;
+		let figureCone = new Cone(radius, height);
+		let vCone = figureCone.getVolume();
+		let sCone = figureCone.getArea();
+		document.body.innerHTML += `<p>радиус конуса = ${radius}<\p>`;
+		document.body.innerHTML += `<p>высота конуса = ${height}<\p>`;
+		document.body.innerHTML += `<p>объем конуса = ${vCone}<\p>`;
+		document.body.innerHTML += `<p>площадь конуса = ${sCone}<\p>`;
+
+	</script>
+</body>
+
+</html>
