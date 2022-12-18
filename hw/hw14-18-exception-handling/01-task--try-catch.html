@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 01</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+  Внесите правки в данный код. 
+  Сделайте, чтобы при наличии ошибки во время восстановления объекта из JSON строки
+  выводилось сообщение - "Ошибка при чтении JSON"
+
+	let json = '{"name" : "Ivan", "age" = 20}';
+	let jsonGood = '{"name" : "Ivan", "age" : 20}';
+	
+	try {
+	  let obj = JSON.parse(json);
+	  console.log(obj.name);
+	  console.log(obj.age);
+	}
+	catch {
+	  console.log(`Ошибка при чтении JSON`);
+	  alert(`Ошибка при чтении JSON`);
+	}
+	
+	try {
+	  let obj = JSON.parse(jsonGood);
+	  console.log(obj.name);
+	  console.log(obj.age);
+	}
+	catch {
+	  console.log(`Ошибка при чтении JSON`);
+	  alert(`Ошибка при чтении JSON`);
+	}
+------------------------------------------------------------------------------
+функция JSON.parse должна вернуть объект, но не может этого сделать 
+из-за неправильных входных данных, она выбрасывает исключение (генерирует ошибку),
+которая останавливает дальнейшее выполнение сценария.
+-------
+исключение прекращает выполнение всех последующих инструкций в блоке try 
+и переносит выполнение в блок catch.
+_________________________________________________________________________________________
+</pre>
+
+	<script>
+		/*
+		Задание:
+		Внесите правки в данный код. Сделайте, чтобы при наличии ошибки 
+		во время восстановления объекта из JSON строки
+		выводилось сообщение - "Ошибка при чтении JSON"
+		*/
+
+		let json = '{"name" : "Ivan", "age" = 20}';
+		let jsonGood = '{"name" : "Ivan", "age" : 20}';
+
+		try {
+			let obj = JSON.parse(json);
+			console.log(obj.name);
+			console.log(obj.age);
+		}
+		catch {
+			console.log(`Ошибка при чтении JSON`);
+			alert(`Ошибка при чтении JSON`);
+		}
+
+		try {
+			let obj = JSON.parse(jsonGood);
+			console.log(obj.name);
+			console.log(obj.age);
+		}
+		catch {
+			console.log(`Ошибка при чтении JSON`);
+			alert(`Ошибка при чтении JSON`);
+		}
+
+	</script>
+</body>
+
+</html>

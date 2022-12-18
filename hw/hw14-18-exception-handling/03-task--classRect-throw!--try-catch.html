@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 03</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Добавьте в данный сценарий обработку исключений
+для той части кода, где исключение может возникнуть.
+-----------------------------------------------------------------
+class Rect {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+set width(value) {
+if (value < 0) { 
+	throw new Error("Значение для width не может быть меньше 0"); 
+} else { this._width=value; } }
+--------------------------------
+let r1 = new Rect(10, 20);
+
+try {
+	r1.height = -10; // ошибка
+	r1.width = 30;
+}
+catch (err) {
+	console.log(err.message);
+}
+________________________________________________________________________
+</pre>
+
+	<script>
+		/*
+		Задание:
+		Добавьте в данный сценарий обработку исключений 
+		для той части кода, где исключение может возникнуть.
+		*/
+		class Rect {
+			constructor(width, height) {
+				this.width = width;
+				this.height = height;
+			}
+
+			get width() {
+				if (this._width === undefined) {
+					this._width = 0;
+				}
+
+				return this._width;
+			}
+
+			set width(value) {
+				if (value < 0) {
+					throw new Error("Значение для width не может быть меньше 0");
+				} else {
+					this._width = value;
+				}
+			}
+
+			get height() {
+				if (this._height === undefined) {
+					this._height = 0;
+				}
+
+				return this._height;
+			}
+
+			set height(value) {
+				if (value < 0) {
+					throw new Error("Значение для height не может быть меньше 0");
+				} else {
+					this._height = value;
+				}
+			}
+
+			get area() {
+				return this.height * this.width;
+			}
+		}
+
+		let r1 = new Rect(10, 20);
+
+		try {
+			r1.height = -10; // ошибка
+			r1.width = 30;
+		}
+		catch (err) {
+			console.log(err.message);
+		}
+
+		console.log("width " + r1.width);
+		console.log("height " + r1.height);
+		console.log("area " + r1.area);
+	</script>
+</body>
+
+</html>
