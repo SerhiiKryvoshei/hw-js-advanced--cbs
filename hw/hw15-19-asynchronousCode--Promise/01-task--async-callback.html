@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 01</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Используя функцию downloadImage и создав необходимые функции обратного вызова,
+реализуйте скачивание изображения по пути 
+   https://images-assets.nasa.gov/image/PIA16239/PIA16239~orig.jpg
+при нажатии на кнопку Скачать, и вывод скаченного изображения в элемент #output
+
+-- фрагмент JS
+const btn = document.querySelector('#download');
+const elementOutput = document.querySelector('#output');
+
+let url = "https://images-assets.nasa.gov/image/PIA16239/PIA16239~orig.jpg";
+
+btn.addEventListener('click', (e) => {
+   downloadImage(url, 
+                 (loadImg) => output.append(loadImg),
+                 (err)     => console.log(err.message)
+								 );
+})
+---------------------------------------------------------------------------------
+</pre>
+
+	<!-- <button>Скачать</button> -->
+	<button id="download">Скачать</button>
+	<div id="output"></div>
+
+	<script>
+		/*
+		Задание:
+		Используя функцию downloadImage и создав необходимые функции обратного вызова, реализуйте скачивание изображения
+		по пути https://images-assets.nasa.gov/image/PIA16239/PIA16239~orig.jpg 
+		при нажатии на кнопку Скачать, и вывод скаченного изображения в элемент #output
+		*/
+
+		function downloadImage(url, success, error) {
+			let image = new Image(500);
+			image.src = url;
+
+			image.onload = function () {
+				// Запускаем callback функцию success в случае успешной загрузки изображения
+				if (success && typeof success == "function")
+					success(image);
+			};
+
+			image.onerror = function (e) {
+				// Запускаем callback функцию error в случае успешной загрузки изображения
+				if (error && typeof error == "function")
+					error(new Error("Не удалось загрузить изображение " + this.src));
+			}
+		}
+
+		// +++
+		const btn = document.querySelector('#download');
+		const elementOutput = document.querySelector('#output');
+		let url = "https://images-assets.nasa.gov/image/PIA16239/PIA16239~orig.jpg";
+
+		btn.addEventListener('click', (e) => {
+			downloadImage(url, (loadImg) => output.append(loadImg), (err) => console.log(err.message));
+		})
+
+	</script>
+</body>
+
+</html>

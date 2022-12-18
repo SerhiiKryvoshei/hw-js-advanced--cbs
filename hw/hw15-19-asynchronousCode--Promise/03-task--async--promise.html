@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 03</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+ Внесите правки в функцию asyncOperation. 
+ Эта функция представляет абстрактную асинхронную операцию, выполнение которой занимает 2 секунды. 
+ Результатом асинхронной операции является случайное значение от 0 до 5000 (записывается в переменную result).
+  Необходимо внести правки в функцию asyncOperation и реализовать использование Promise для того чтобы код,
+  вызвавший asyncOperation, мог получить результат работы асинхронной операции.
+  Добавьте обработчик на нажатие по кнопке Запустить, 
+  вызовите асинхронную операцию и, используя Promise, обработайте результат, отобразив его через alert
+-------------------------------------------------------------------------------------------------------------
+
+</pre>
+	<button id="btn">Запустить</button>
+	<script>
+		/*
+		Задание:
+		Внесите правки в функцию asyncOperation. Эта функция представляет абстрактную асинхронную операцию, выполнение которой
+		занимает 2 секунды. Результатом асинхронной операции является случайное значение от 0 до 5000 (записывается в переменную 
+		result).
+		Необходимо внести правки в функцию asyncOperation и реализовать использование Promise для того
+		чтобы код, вызвавший asyncOperation, мог получить результат работы асинхронной операции. Добавьте обработчик на нажатие по
+		кнопке Запустить, вызовите асинхронную операцию и, используя Promise, обработайте результат, отобразив его 
+		через alert
+		*/
+
+		// function asyncOperation() {
+		// 	setTimeout(function () {
+		// 		let result = Math.floor(Math.random() * 5001);
+		// 	}, 2000)
+		// }
+		function asyncOperation() {
+			return new Promise(function (resolve, reject) {
+				setTimeout(function () {
+					let result = Math.floor(Math.random() * 5001);
+					resolve(result);
+				}, 2000);
+			});
+		}
+
+		const btn = document.querySelector('#btn');
+
+		btn.addEventListener('click', (e) => {
+			asyncOperation().then(rnd => alert(`Спустя 2 секунды случайное значение от 0 до 5000: ${rnd}`))
+		});
+
+	</script>
+</body>
+
+</html>
