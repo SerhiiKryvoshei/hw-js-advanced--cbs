@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 01</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Добавьте возможность сохранить выбранный цвет страницы в cookies
+  сроком на 1 неделю.
+Добавьте восстановление выбранного цвета из cookies, 
+  если они есть, после загрузки документа.
+----------------------------------------------------------------
+function setCookie(name, value, maxAge) {
+function getCookie(name) {
+
+________________________________________________________________
+</pre>
+	<form>
+		<input type="radio" name="color" value="#ffd800" /> Orange
+		<input type="radio" name="color" value="#5ade54" /> Green
+		<input id="saveButton" type="button" value="Сохранить" />
+	</form>
+
+	<script>
+		/*
+				Задание:
+				Добавьте возможность сохранить выбранный цвет страницы в cookies сроком на 1 неделю.
+				Добавьте восстановление выбранного цвета из cookies, если они есть, после загрузки документа.
+		*/
+
+		function setCookie(name, value, maxAge) {
+			let encodedValue = encodeURIComponent(value);
+			document.cookie = `${name}=${encodedValue};max-age=${maxAge}`;
+		}
+
+		function getCookie(name) {
+			let cookie = document.cookie;
+			let pos = cookie.indexOf(name + "=");
+
+			if (pos != -1) {
+				let start = pos + name.length + 1;
+				let end = cookie.indexOf(";", start);
+
+				if (end == -1) {
+					end = cookie.length;
+				}
+
+				let value = cookie.substring(start, end);
+
+				return decodeURIComponent(value);
+			}
+		}
+
+		let pageColor = getCookie("color");
+
+		if (pageColor) {
+			document.body.style.backgroundColor = pageColor;
+			document.querySelector(`input[value='${pageColor}']`).checked = true;
+		}
+
+		document.querySelector("#saveButton").addEventListener("click", function () {
+			const form = document.forms[0];
+			let selectedColor = form.color.value;
+			// +++
+			setCookie("color", selectedColor, 7 * 24 * 60 * 60);
+			// ---
+			document.body.style.backgroundColor = selectedColor;
+		});
+	</script>
+</body>
+
+</html>

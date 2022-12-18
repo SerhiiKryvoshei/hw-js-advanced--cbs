@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 02</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Сделайте так чтобы значение, введенное в поле ввода на данной странице, сохранялось при каждом изменении.
+Когда пользователь повторно зайдет на эту страницу, поле ввода должно содержать последнее введенное значение.
+</pre>
+
+	<textarea class="text" rows="10" cols="30"></textarea>
+	<script>
+		/*
+		Задание:
+		Сделайте так чтобы значение, введенное в поле ввода на данной странице, сохранялось при каждом изменении.
+		Когда пользователь повторно зайдет на эту страницу, поле ввода должно содержать последнее введенное значение.
+		*/
+
+		const str = document.querySelector('.text');
+		let userText = localStorage.getItem('user-text');
+		if (userText) str.value = userText;
+
+		str.addEventListener('change', (e) => localStorage.setItem('user-text', str.value))
+
+	</script>
+</body>
+
+</html>
