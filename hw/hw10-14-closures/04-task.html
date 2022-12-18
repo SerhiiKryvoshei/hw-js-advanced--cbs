@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 04</title>
+</head>
+
+<body>
+	<pre>
+Задание:
+Используя IIFE избавьтесь от глобальных идентификаторов в коде.
+Убедитесь в том, что глобальных идентификаторов нет, выполнив код после 25 строки
+</pre>
+	<script>
+		/*
+		Задание:
+		Используя IIFE избавьтесь от глобальных идентификаторов в коде.
+		Убедитесь в том, что глобальных идентификаторов нет, выполнив код после 25 строки
+		*/
+		// var exampleName1 = "Test1";
+		// let exampleName2 = "Test2";
+
+		// function testFunc() {
+		// 	console.log("This is test function");
+		// }
+
+
+		(function () {
+			var exampleName1 = "Test1";
+			let exampleName2 = "Test2";
+			function testFunc() {
+				console.log("This is test function");
+			}
+		})();
+
+		// код для проверки глобальных идентификаторов, выполните за пределами IIFE
+		// если глобальных переменных нет - будет возвращено значение undefind
+		// если функция testFunc не глобальная - будет ошибка на этапе выполнения
+		console.log(globalThis.exampleName1);
+		console.log(globalThis.exampleName2);
+		console.log(exampleName2);
+
+		globalThis.testFunc();
+		testFunc();
+	</script>
+</body>
+
+</html>
