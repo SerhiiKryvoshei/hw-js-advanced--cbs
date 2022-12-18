@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 05</title>
+	<style>
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		#userList {
+			width: 200px;
+			display: inline-block;
+		}
+
+		#userList>li {
+			cursor: pointer;
+			list-style: none;
+		}
+
+		#userList>li:hover {
+			background-color: orange;
+		}
+
+		#userList li.selected {
+			background-color: lightcoral;
+		}
+
+		#output {
+			display: inline-block;
+			border: 1px solid gray;
+			padding: 10px;
+			vertical-align: top;
+			margin-top: 20px;
+			width: 300px;
+			min-height: 180px;
+		}
+
+		.form-group {
+			margin-bottom: 4px;
+		}
+
+		.form-group label {
+			width: 85px;
+			display: inline-block;
+		}
+
+		.form-group input {
+			width: 200px;
+		}
+	</style>
+</head>
+
+<body>
+	<pre>
+Задание:
+Добавьте в форму кнопки "Очистить форму" и "Удалить"
+При нажатии на кнопку "Очистить форму" - все поля ввода формы очищаются (рассмотрите использования кнопки reset)
+При нажатии на кнопку "Удалить" - выбранный элемент удаляется из списка, а форма очищается
+---------------------------------------------------------------------------------------------------------------
+------- class ListService
+currentData.id = index;
+
+deleteSelectedItem() {
+	const index = this.data.indexOf(this.selectedData);
+	if (index != -1) {
+		this.listElement.children[index].remove();
+		this.data.splice(index, 1);
+	}
+}
+
+------- class UserFormService
+resetForm() {
+	this.form.reset();
+}
+
+-------Логика
+deleteButton.addEventListener('click', (e) => {
+	listService.deleteSelectedItem();
+	formService.resetForm();
+});
+
+----------------------------------------------------------------------------------------------------------------
+</pre>
+
+	<ul id="userList">
+	</ul>
+
+	<form id="output">
+		<div class="form-group">
+			<label for="firstName">Имя</label>
+			<input type="text" name="firstName" id="firstName">
+		</div>
+		<div class="form-group">
+			<label for="lastName">Фамилия</label>
+			<input type="text" name="lastName" id="lastName">
+		</div>
+		<div class="form-group">
+			<label for="companyName">Компания</label>
+			<input type="text" name="companyName" id="companyName">
+		</div>
+		<div class="form-group">
+			<label for="balance">Баланс</label>
+			<input type="number" name="balance" id="balance">
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email" name="email" id="email">
+		</div>
+		<div class="form-group">
+			<label for="age">Возраст</label>
+			<input type="number" name="age" id="age">
+		</div>
+
+		<input type="button" value="Save" id="saveButton">
+		<input type="reset" value="Reset">
+		<input type="button" value="Delete" id="deleteButton">
+
+	</form>
+
+	<script>
+		/*
+		Задание:
+		Добавьте в форму кнопки "Очистить форму" и "Удалить"
+		При нажатии на кнопку "Очистить форму" - все поля ввода формы очищаются (рассмотрите использования кнопки reset)
+		При нажатии на кнопку "Удалить" - выбранный элемент удаляется из списка, а форма очищается
+		*/
+
+		let users = [
+			{
+				balance: '1250.89',
+				age: 24,
+				name: {
+					first: 'Golden',
+					last: 'Clements'
+				},
+				company: 'EWAVES',
+				email: 'golden.clements@ewaves.io'
+			},
+			{
+				balance: '3637.94',
+				age: 23,
+				name: {
+					first: 'Francis',
+					last: 'Hebert'
+				},
+				company: 'XPLOR',
+				email: 'francis.hebert@xplor.biz'
+			},
+			{
+				balance: '1106.44',
+				age: 31,
+				name: {
+					first: 'Hale',
+					last: 'Cross'
+				},
+				company: 'EARTHPURE',
+				email: 'hale.cross@earthpure.us'
+			},
+			{
+				balance: '2502.43',
+				age: 25,
+				name: {
+					first: 'Delores',
+					last: 'Sykes'
+				},
+				company: 'ASSITIA',
+				email: 'delores.sykes@assitia.com'
+			},
+			{
+				balance: '3651.54',
+				age: 21,
+				name: {
+					first: 'Ryan',
+					last: 'Bolton'
+				},
+				company: 'MOLTONIC',
+				email: 'ryan.bolton@moltonic.biz'
+			},
+			{
+				balance: '1345.79',
+				age: 21,
+				name: {
+					first: 'Carey',
+					last: 'Schwartz'
+				},
+				company: 'UXMOX',
+				email: 'carey.schwartz@uxmox.info'
+			},
+			{
+				balance: '3261.11',
+				age: 30,
+				name: {
+					first: 'Trevino',
+					last: 'Mullins'
+				},
+				company: 'TERRASYS',
+				email: 'trevino.mullins@terrasys.org'
+			},
+			{
+				balance: '1659.17',
+				age: 20,
+				name: {
+					first: 'Gilliam',
+					last: 'Mendez'
+				},
+				company: 'ZENTHALL',
+				email: 'gilliam.mendez@zenthall.tv'
+			},
+			{
+				balance: '2340.54',
+				age: 32,
+				name: {
+					first: 'Brewer',
+					last: 'Vargas'
+				},
+				company: 'QIMONK',
+				email: 'brewer.vargas@qimonk.co.uk'
+			},
+			{
+				balance: '1736.91',
+				age: 24,
+				name: {
+					first: 'Newman',
+					last: 'Wynn'
+				},
+				company: 'VISALIA',
+				email: 'newman.wynn@visalia.name'
+			}
+		];
+
+		// класс для вывода информации в UL
+		class ListService {
+			selectedData;
+			data;
+			listElement;
+
+			constructor(data, listElement, displayFn) {
+				this.data = data;
+				this.listElement = listElement;
+
+				for (let index = 0; index < data.length; index++) {
+					const currentData = data[index];
+
+					let li = document.createElement("li");
+					li.textContent = displayFn(currentData);
+					// +++ решение
+					currentData.id = index;
+					// --- решение
+					li.dataset.index = index;
+
+					this.listElement.append(li);
+				}
+			}
+
+			select(id) {
+				// +++ решение
+				// this.selectedData = this.data[id];
+				this.selectedData = this.data.filter(i => i.id == id)[0];
+				this.deselectAll();
+				// this.listElement.children[id].classList.add("selected");
+				const index = this.data.indexOf(this.selectedData)
+				this.listElement.children[index].classList.add("selected");
+				// --- решение
+			}
+
+			deselectAll() {
+				for (let i = 0; i < this.listElement.children.length; i++) {
+					const child = this.listElement.children[i];
+					child.classList.remove("selected");
+				}
+			}
+
+			// +++ решение
+			deleteSelectedItem() {
+				const index = this.data.indexOf(this.selectedData);
+				if (index != -1) {
+					this.listElement.children[index].remove();
+					this.data.splice(index, 1);
+				}
+			}
+			// --- решение
+		}
+
+		// Класс для работы с формой, редактирующей информацию о пользователе
+		class UserFormService {
+			currentUser;
+			form;
+
+			constructor(form) {
+				this.form = form;
+			}
+
+			fillForm(user) {
+				this.currentUser = user;
+
+				this.form.firstName.value = user.name.first;
+				this.form.lastName.value = user.name.last;
+				this.form.companyName.value = user.company;
+				this.form.balance.value = user.balance;
+				this.form.email.value = user.email;
+				this.form.age.value = user.age;
+			}
+
+			saveForm() {
+				this.currentUser.name.first = this.form.firstName.value;
+				this.currentUser.name.last = this.form.lastName.value;
+				this.currentUser.company = this.form.companyName.value;
+				this.currentUser.balance = this.form.balance.value;
+				this.currentUser.email = this.form.email.value;
+				this.currentUser.age = this.form.age.value;
+			}
+
+			// +++ решение
+			resetForm() {
+				this.form.reset();
+			}
+			// --- решение
+
+		}
+
+		const deleteButton = document.querySelector("#deleteButton");
+		let userList = document.querySelector("#userList");
+		let saveButton = document.querySelector("#saveButton");
+
+		let listService = new ListService(users, userList, x => x.name.first + " " + x.name.last);
+		let formService = new UserFormService(document.forms[0]);
+
+		userList.addEventListener("click", function (e) {
+			if (e.target.tagName != "LI") return;
+
+			const userNumber = e.target.dataset.index;
+			listService.select(userNumber);
+			formService.fillForm(listService.selectedData);
+		});
+
+		saveButton.addEventListener("click", function () {
+			formService.saveForm();
+		});
+
+		// +++ решение
+		deleteButton.addEventListener('click', (e) => {
+			listService.deleteSelectedItem();
+			formService.resetForm();
+		});
+	 // --- решение
+
+	</script>
+</body>
+
+</html>

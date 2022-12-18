@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 01</title>
+
+	<style>
+		.form-group {
+			margin: 4px;
+		}
+
+		.form-group label {
+			width: 75px;
+			display: inline-block;
+		}
+	</style>
+</head>
+
+<body>
+	<pre>
+Задание:
+При нажатии на кнопку "Отобразить значения", используя цикл for,
+выведите значения всех элементов управления input
+(кроме input type=button), на консоль.
+----------------------------------------------------------------
+
+</pre>
+
+	<form id="loginForm">
+		<div class="form-group">
+			<label>Логин</label>
+			<input type="text" name="loginInput">
+		</div>
+		<div class="form-group">
+			<label>Пароль</label>
+			<input type="password" name="passwordInput">
+		</div>
+		<div class="form-group">
+			<label>Имя</label>
+			<input type="text" name="nameInput">
+		</div>
+		<div class="form-group">
+			<label>Фамилия</label>
+			<input type="text" name="lastNameInput">
+		</div>
+		<div class="form-group">
+			<input type="button" value="Отобразить значения">
+		</div>
+	</form>
+
+	<script>
+		/*
+		Задание:
+		При нажатии на кнопку "Отобразить значения", используя цикл for, выведите значения всех элементов управления input (кроме input type=button), на консоль.
+		*/
+
+		const loginForm = document.querySelector('#loginForm');
+
+		loginForm.addEventListener('click', (e) => {
+			if (e.target.type == 'button') {
+				for (let i = 0; i < loginForm.length; i++) {
+					const element = loginForm[i];
+					if (element.type != 'button') console.log(`${element.name} = ${element.value}`)
+				}
+			}
+		});
+
+	</script>
+</body>
+
+</html>
