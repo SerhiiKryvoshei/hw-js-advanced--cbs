@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 03</title>
+</head>
+
+<body>
+
+	<pre>
+Задание:
+Найдите и исправьте проблему в методах getGreaterThanThreshold и getLessThanThreshold
+</pre>
+
+	<script>
+		/*
+		Задание:
+		Найдите и исправьте проблему в методах getGreaterThanThreshold и getLessThanThreshold
+		*/
+
+		class Numbers {
+			#values;
+			#threshold;
+
+			constructor(threshold, values) {
+				this.#values = values;
+				this.#threshold = threshold;
+			}
+
+			// Возвращает все значения из массива values, которые больше, чем значение переменной threshold
+			getGreaterThanThreshold() {
+				// return this.#values.filter(function (v) {
+				// 	return v > this.#threshold;
+				// })
+				return this.#values.filter((v) => {
+					return v > this.#threshold;
+				})
+			}
+
+			// возвращает все значения из массива values, которые меньше, чем значение переменной threshold 
+			getLessThanThreshold() {
+				// return this.#values.filter(function (v) {
+				// 	return v < this.#threshold;
+				// })
+				return this.#values.filter(v => v < this.#threshold);
+			}
+		}
+
+		let numbers = new Numbers(50, [10, 20, 23, 11, 5, 6, 90, 33, 45, 67]);
+		let gt = numbers.getGreaterThanThreshold();
+		let lt = numbers.getLessThanThreshold();
+
+		console.log(gt);
+		console.log(lt);
+	</script>
+</body>
+
+</html>

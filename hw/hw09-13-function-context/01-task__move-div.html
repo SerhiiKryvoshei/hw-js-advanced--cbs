@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 01</title>
+
+	<style>
+		#container {
+			position: relative;
+			border: 1px solid gray;
+			width: 265px;
+			height: 50px;
+			margin-top: 20px;
+		}
+
+		#element {
+			width: 50px;
+			height: 50px;
+			background-color: green;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<pre>
+Задание:
+Доработайте сценарий.
+- При нажатии на кнопку стоп, анимация должна остановиться.
+- При нажатии на кнопку ускорить, анимация должна ускориться, при повторных нажатиях скорость анимации
+должна увеличиваться.
+- При нажатии на кнопку "Замедлить" - анимация замедляется, при повторных нажатиях скорость становится
+меньше.
+</pre>
+
+	<button id="startBtn">Старт</button>
+	<button id="stopBtn">Стоп</button>
+	<button id="increaseBtn">Ускорить</button>
+	<button id="decreaseBtn">Замедлить</button>
+
+	<div id="container">
+		<div id="element"></div>
+	</div>
+
+	<script>
+		/*
+		Задание:
+
+		Доработайте сценарий. 
+		- При нажатии на кнопку стоп, анимация должна остановиться.
+		- При нажатии на кнопку ускорить, анимация должна ускориться, при повторных нажатиях скорость анимации
+			должна увеличиваться. 
+		- При нажатии на кнопку "Замедлить" - анимация замедляется, при повторных нажатиях скорость становится
+			меньше.
+		*/
+
+		let element = document.querySelector("#element");
+		let elementWidth = parseInt(getComputedStyle(element).width);
+		let containerWidth = parseInt(getComputedStyle(document.querySelector("#container")).width);
+
+		let direction = "right";
+
+		// +++ решение
+		let timerID = null;
+		let step = 3;
+		// ---
+
+		function moveLeft() {
+			element.style.left = getLeft(element) - step + "px";
+		}
+
+		function moveRight() {
+			element.style.left = getLeft(element) + step + "px";
+		}
+
+		function getLeft(e) {
+			return parseInt(getComputedStyle(e).left);
+		}
+
+		function move() {
+			if (getLeft(element) >= containerWidth - elementWidth) {
+				direction = "left";
+			}
+			if (getLeft(element) <= 0) {
+				direction = "right";
+			}
+
+			if (direction == "right") {
+				moveRight();
+			}
+			else {
+				moveLeft();
+			}
+		}
+
+
+		// +++ решение
+
+		document.querySelector("#startBtn").addEventListener("click", function () {
+			// setInterval(move, 40);
+			if (!timerID) {
+				timerID = setInterval(move, 40);
+			}
+		});
+
+		document.querySelector("#stopBtn").addEventListener("click", function () {
+			if (timerID) {
+				clearInterval(timerID);
+				timerID = null;
+			}
+		});
+
+		document.querySelector("#increaseBtn").addEventListener("click", function () {
+			step += 1;
+		});
+
+		document.querySelector("#decreaseBtn").addEventListener("click", function () {
+			if (step >= 1) {
+				step -= 1;
+			} else step = 0;
+		});
+
+	</script>
+</body>
+
+</html>
