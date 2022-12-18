@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 05</title>
+
+	<style>
+		.form-group {
+			margin: 10px 4px;
+		}
+
+		.form-group label {
+			display: block;
+		}
+
+		.error {
+			color: red;
+			display: none;
+		}
+
+		.invalid {
+			border: red 1px solid;
+		}
+
+		.valid {
+			border: green 1px solid;
+		}
+	</style>
+
+</head>
+
+<body>
+	<pre>
+Задание:
+Применяя подход, реализованный в данном сценарии, добавьте валидацию для поля ввода
+	"Номер кредитной карты". 
+Поле ввода должно содержать значение в формате
+	ХХХХ ХХХХ ХХХХ ХХХХ 
+где X - это число от 0 до 9
+
+Пример создания регулярного выражения в коде:
+	let regex = new RegExp("\\d{4}");
+для того чтобы в строке определить метасимвол \d, 
+символ слеш нужно экранировать, добавив дополнительный слеш
+метасимвол \d в JS строке должен использоваться как \\d
+------------------------------------------
+data-val="true" 
+data-required="Введите номер кредитной карты"
+data-error-label="creditCardErrorLabel" 
+data-credit-card="s"
+------------------------------------------------------------------------------------
+</pre>
+
+	<form>
+		<div class="form-group">
+			<label>Email</label>
+			<input type="text" name="email" data-val="true" data-required="Введите Email"
+				data-pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" data-error-label="emailErrorLabel">
+			<span class="error" id="emailErrorLabel">Ошибка</span>
+		</div>
+		<div class="form-group">
+			<label>Пароль</label>
+			<input type="password" name="password" data-val="true" data-required="Введите пароль" id="password"
+				data-error-label="passwordErrorLabel">
+			<span class="error" id="passwordErrorLabel">Ошибка</span>
+		</div>
+		<div class="form-group">
+			<label>Подтверждение пароля</label>
+			<input type="password" name="passwordConfirm" id="passwordConfirm" data-val="true"
+				data-required="Введите подтверждение пароля" data-confirm="password"
+				data-error-label="passwordConfirmErrorLabel">
+			<span class="error" id="passwordConfirmErrorLabel">Ошибка</span>
+		</div>
+		<div class="form-group">
+			<label>Номер кредитной карты</label>
+
+			<!-- +++ -->
+			<!-- <input type="text" name="creditCard"> -->
+			<input type="text" name="creditCard" data-val="true" data-required="Введите номер кредитной карты"
+				data-error-label="creditCardErrorLabel" data-credit-card="s">
+			<!-- --- -->
+			<span class="error" id="creditCardErrorLabel">Ошибка</span>
+
+		</div>
+		<div class="form-group">
+			<input type="submit" value="Регистрация">
+		</div>
+	</form>
+
+	<script>
+
+		/*
+		Задание:
+		Применяя подход, реализованный в данном сценарии, добавьте валидацию для поля ввода
+		"Номер кредитной карты". Поле ввода должно содержать значение в формате 
+		ХХХХ ХХХХ ХХХХ ХХХХ где X - это число от 0 до 9
+
+		Пример создания регулярного выражения в коде:
+		let regex = new RegExp("\\d{4}");
+		для того чтобы в строке определить метасимвол \d, символ слеш нужно экранировать, добавив дополнительный слеш
+		метасимвол \d в JS строке должен использоваться как \\d
+
+		*/
+		const form = document.forms[0];
+
+		let elements = document.querySelectorAll("[data-val='true']");
+
+		elements.forEach(element => {
+			element.addEventListener("change", onChangeHandler);
+		});
+
+		form.addEventListener("submit", onSubmitHandler);
+
+		function onChangeHandler(e) {
+			const element = e.target;
+			if (element.tagName == "INPUT") {
+				validateElement(element);
+			}
+		}
+
+		function onSubmitHandler(e) {
+			for (let i = 0; i < form.elements.length; i++) {
+				const element = form.elements[i];
+				let valid = validateElement(element);
+				if (!valid) {
+					e.preventDefault();
+				}
+			}
+		}
+
+		function validateElement(element) {
+			for (const key in validators) {
+				if (Object.hasOwnProperty.call(validators, key) && typeof validators[key] == "object") {
+
+					if (element.dataset[key]) {
+						const validator = validators[key];
+						if (!validator.isValid(element))
+							return false;
+					}
+				}
+			}
+
+			return true;
+		}
+
+		let validators = {};
+
+		validators.validate = function (element, message, predicate) {
+			let errorLabel = document.querySelector("#" + element.dataset.errorLabel);
+			errorLabel.innerHTML = message;
+			errorLabel.style.display = "none";
+			element.classList.remove("valid");
+			element.classList.remove("invalid");
+
+			if (typeof predicate == "function" && predicate()) {
+				element.classList.add("valid");
+				return true;
+			}
+			else {
+				element.classList.add("invalid");
+				errorLabel.style.display = "block";
+				return false;
+			}
+		};
+
+		validators.required = {
+			isValid: function (element) {
+				let message = element.dataset.required;
+				return validators.validate(element, message, () => element.value.length > 0);
+			}
+		};
+
+		validators.pattern = {
+			isValid: function (element) {
+				let message = "Введенное значение не соответствует шаблону";
+				let regex = new RegExp(element.dataset.pattern);
+				return validators.validate(element, message, () => regex.test(element.value));
+			}
+		};
+
+		validators.confirm = {
+			isValid: function (element) {
+				let message = "Значения не совпадают";
+				let confirmInput = document.querySelector("#" + element.dataset.confirm);
+				return validators.validate(element, message, () => element.value == confirmInput.value);
+			}
+		};
+
+		// +++
+		validators.creditCard = {
+			isValid: function (element) {
+				let message = "Введенное значение не соответствует шаблону ХХХХ ХХХХ ХХХХ ХХХХ";
+				let regex = new RegExp("\\d{4} \\d{4} \\d{4} \\d{4}");
+				return validators.validate(element, message, () => regex.test(element.value));
+			}
+		};
+		// ---
+
+	</script>
+</body>
+
+</html>
